@@ -1,0 +1,265 @@
+
+                           index.html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JavaScript Fundamentals</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>JavaScript Fundamentals</h1>
+    </header>
+
+    <main>
+        <!-- Part 1: Basic JavaScript -->
+        <section id="basics">
+            <h2>Part 1: JavaScript Basics</h2>
+            <div class="demo-box">
+                <label for="userAge">Enter your age:</label>
+                <input type="number" id="userAge" placeholder="Enter age">
+                <button id="checkAgeBtn">Check Eligibility</button>
+                <p id="ageResult"></p>
+            </div>
+        </section>
+
+        <!-- Part 2: Functions -->
+        <section id="functions">
+            <h2>Part 2: JavaScript Functions</h2>
+            <div class="demo-box">
+                <button id="calculateBtn">Calculate Circle Area</button>
+                <p id="functionResult"></p>
+            </div>
+        </section>
+
+        <!-- Part 3: Loops -->
+        <section id="loops">
+            <h2>Part 3: JavaScript Loops</h2>
+            <div class="demo-box">
+                <button id="generateListBtn">Generate Number List</button>
+                <ul id="numberList"></ul>
+            </div>
+        </section>
+
+        <!-- Part 4: DOM Manipulation -->
+        <section id="dom">
+            <h2>Part 4: DOM Manipulation</h2>
+            <div class="demo-box">
+                <button id="changeColorBtn">Change Header Color</button>
+                <button id="addItemBtn">Add List Item</button>
+                <button id="toggleVisibilityBtn">Toggle Section Visibility</button>
+                <ul id="dynamicList"></ul>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>JavaScript Fundamentals Assignment</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+                           style.css
+/* Basic styling for the demo */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+header {
+    background-color: #3498db;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+section {
+    margin-bottom: 30px;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.demo-box {
+    background-color: #f9f9f9;
+    padding: 15px;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+
+button {
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    margin: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #27ae60;
+}
+
+input {
+    padding: 8px;
+    margin: 5px;
+}
+
+ul {
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+.highlight {
+    color: #e74c3c;
+    font-weight: bold;
+}
+
+
+                 script.js
+/**************************************
+ * Part 1: JavaScript Basics
+ * Variables, conditionals, and user input
+ **************************************/
+
+// Variable declarations
+const ageInput = document.getElementById('userAge');
+const checkAgeBtn = document.getElementById('checkAgeBtn');
+const ageResult = document.getElementById('ageResult');
+
+// Event listener for age check button
+checkAgeBtn.addEventListener('click', () => {
+    // Get user input and convert to number
+    const age = parseInt(ageInput.value);
+    
+    // Conditional logic
+    if (isNaN(age)) {
+        ageResult.textContent = 'Please enter a valid number';
+        ageResult.className = 'highlight';
+    } else if (age < 0) {
+        ageResult.textContent = 'Age cannot be negative!';
+        ageResult.className = 'highlight';
+    } else if (age < 18) {
+        ageResult.textContent = 'You are a minor';
+        ageResult.className = '';
+    } else {
+        ageResult.textContent = 'You are an adult';
+        ageResult.className = '';
+    }
+});
+
+/**************************************
+ * Part 2: JavaScript Functions
+ * Reusable blocks of code
+ **************************************/
+
+// Function to calculate circle area
+function calculateCircleArea(radius) {
+    return Math.PI * radius * radius;
+}
+
+// Function to format output
+function formatArea(radius, area) {
+    return `A circle with radius ${radius} has an area of ${area.toFixed(2)}`;
+}
+
+// DOM elements for function demo
+const calculateBtn = document.getElementById('calculateBtn');
+const functionResult = document.getElementById('functionResult');
+
+// Event listener for calculate button
+calculateBtn.addEventListener('click', () => {
+    const radius = 5; // Could be dynamic with user input
+    const area = calculateCircleArea(radius);
+    functionResult.textContent = formatArea(radius, area);
+});
+
+/**************************************
+ * Part 3: JavaScript Loops
+ * Working with repetition
+ **************************************/
+
+// DOM elements for loop demo
+const generateListBtn = document.getElementById('generateListBtn');
+const numberList = document.getElementById('numberList');
+
+// Event listener for generate list button
+generateListBtn.addEventListener('click', () => {
+    // Clear previous list
+    numberList.innerHTML = '';
+    
+    // For loop to generate numbers
+    for (let i = 1; i <= 10; i++) {
+        const li = document.createElement('li');
+        li.textContent = `Item ${i}`;
+        numberList.appendChild(li);
+    }
+    
+    // While loop example (commented out but available)
+    /*
+    let count = 1;
+    while (count <= 10) {
+        const li = document.createElement('li');
+        li.textContent = `Item ${count}`;
+        numberList.appendChild(li);
+        count++;
+    }
+    */
+});
+
+/**************************************
+ * Part 4: DOM Manipulation
+ * Making the page interactive
+ **************************************/
+
+// DOM elements for manipulation
+const changeColorBtn = document.getElementById('changeColorBtn');
+const addItemBtn = document.getElementById('addItemBtn');
+const toggleVisibilityBtn = document.getElementById('toggleVisibilityBtn');
+const dynamicList = document.getElementById('dynamicList');
+const domSection = document.getElementById('dom');
+
+// Change header color
+changeColorBtn.addEventListener('click', () => {
+    const header = document.querySelector('header');
+    const currentColor = header.style.backgroundColor;
+    
+    // Toggle between two colors
+    if (currentColor === 'rgb(52, 152, 219)' || !currentColor) {
+        header.style.backgroundColor = '#e74c3c';
+    } else {
+        header.style.backgroundColor = '#3498db';
+    }
+});
+
+// Add item to list
+addItemBtn.addEventListener('click', () => {
+    const itemCount = dynamicList.children.length + 1;
+    const newItem = document.createElement('li');
+    newItem.textContent = `Dynamic Item ${itemCount}`;
+    dynamicList.appendChild(newItem);
+});
+
+// Toggle section visibility
+toggleVisibilityBtn.addEventListener('click', () => {
+    domSection.classList.toggle('hidden');
+});
